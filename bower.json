@@ -1,0 +1,26 @@
+{
+  "name": "zhao",
+  "description": "secure-elastic-front",
+  "main": "public/index.html",
+  "authors": [
+    "zhao"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "front"
+  ],
+  "homepage": "127.0.0.1:5000/public/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chart.js": "^2.5.0",
+    "jquery": "^3.1.1",
+    "handsontable": "^0.31.0"
+  }
+}
