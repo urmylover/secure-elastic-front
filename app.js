@@ -23,7 +23,7 @@ var proceedData = {
 /*var responseData = {
 	user: {total:, data:[]}
 }*/
-
+var PORT = 19200;
 var DATA = [];
 var CONFIG = {
 	currentSum: 0,
@@ -71,7 +71,7 @@ function dataProcess(data){
 if(!CONFIG.firstApply){
 	https.get({
 			hostname: 'localhost',
-			port: 19200,
+			port: PORT,
 			path: '/auditlog/auditlog/_search',
 			auth: 'elastic:changeme',
 			rejectUnauthorized:false,
@@ -146,7 +146,7 @@ if(!CONFIG.firstApply){
 var getAudit = function(){
 	https.get({
 			hostname: 'localhost',
-			port: 19200,
+			port: PORT,
 			path: '/auditlog/auditlog/_search?size=30&from=' + CONFIG.currentSum,
 			auth: 'elastic:changeme',
 			rejectUnauthorized:false,
