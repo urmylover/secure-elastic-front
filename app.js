@@ -69,13 +69,44 @@ function dataProcess(data){
 //首次请求
 
 if(!CONFIG.firstApply){
+
+	var req = https.request({
+			host: '127.0.0.1',
+			path: "/auditlog/_settings",
+			port: PORT,
+			method: "PUT",	
+			auth: 'elastic:changeme',
+			//data:  JSON.parse('{ "index" : { "max_result_window" : 5000000 } }'),
+			rejectUnauthorized:false,
+			headers: {
+				"content-type": "application/json",
+				"Connection": "keep-alive"
+			}
+		}, function(res){
+			console.log('statuscode index:' + res.statusCode);
+			res.on('data', function(data){
+				process.stdout.write(data);
+			});
+			
+		});
+
+	req.on('error', function(e) {
+	  console.log('problem with request: ' + e.message);
+	});
+
+	req.write('{ "index" : { "max_result_window" : 5000000 } }');
+	req.end();
+
 	https.get({
 			hostname: 'localhost',
 			port: PORT,
 			path: '/auditlog/auditlog/_search',
 			auth: 'elastic:changeme',
 			rejectUnauthorized:false,
-			headers: {"content-type": "application/json"}
+			headers: {
+				"content-type": "application/json",
+				"Connection": "keep-alive"
+			}
 		}, function(res){
 			
 			console.log('statuscode ' + res.statusCode);
