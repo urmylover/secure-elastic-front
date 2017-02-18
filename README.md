@@ -3,10 +3,11 @@ secure-elastic-front
 auditLog
 
 usage: 
-  npm install bower
+    
+    npm install bower
   
-  npm install
+    npm install
   
-  bowerinstall
+    bowerinstall
   
-  node app
+     node app
