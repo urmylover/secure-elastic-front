@@ -4,6 +4,9 @@ auditLog
 
 usage: 
   npm install bower
+  
   npm install
+  
   bowerinstall
+  
   node app
