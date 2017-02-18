@@ -16,14 +16,14 @@ var proceedData = {
 	auditNum: 0,
 	tempData: [],
 	user: [],
-	auditCnts:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+	auditCnts:[21,22,20,20,25,20,24,20,23,20,20,21,20,23,25],
 	users: {}
 };
 
 /*var responseData = {
 	user: {total:, data:[]}
 }*/
-var PORT = 19200;
+var PORT = 9200;
 var DATA = [];
 var CONFIG = {
 	currentSum: 0,
