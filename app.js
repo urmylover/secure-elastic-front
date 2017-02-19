@@ -1,6 +1,8 @@
 var http = require('http');
 var https = require('https');
+var URL = require('url');
 var process = require('process');
+
 var moment = require('moment');
 
 var express = require('express');
@@ -20,10 +22,11 @@ var proceedData = {
 	users: {}
 };
 
-/*var responseData = {
-	user: {total:, data:[]}
-}*/
-var PORT = 9200;
+var url = process.env["ELASTICSEARCH_URL"] || "https://127.0.0.1:9200";
+var requestUrl = URL.parse(url);
+var PORT = requestUrl.port;
+var HOSTNAME = requestUrl.hostname;
+
 var DATA = [];
 var CONFIG = {
 	currentSum: 0,
@@ -71,7 +74,7 @@ function dataProcess(data){
 if(!CONFIG.firstApply){
 
 	var req = https.request({
-			host: '127.0.0.1',
+			hostname: HOSTNAME,
 			path: "/auditlog/_settings",
 			port: PORT,
 			method: "PUT",	
@@ -87,7 +90,6 @@ if(!CONFIG.firstApply){
 			res.on('data', function(data){
 				process.stdout.write(data);
 			});
-			
 		});
 
 	req.on('error', function(e) {
@@ -98,7 +100,7 @@ if(!CONFIG.firstApply){
 	req.end();
 
 	https.get({
-			hostname: 'localhost',
+			hostname: HOSTNAME,
 			port: PORT,
 			path: '/auditlog/auditlog/_search',
 			auth: 'elastic:changeme',
@@ -176,7 +178,7 @@ if(!CONFIG.firstApply){
 
 var getAudit = function(){
 	https.get({
-			hostname: 'localhost',
+			hostname: HOSTNAME,
 			port: PORT,
 			path: '/auditlog/auditlog/_search?size=30&from=' + CONFIG.currentSum,
 			auth: 'elastic:changeme',
